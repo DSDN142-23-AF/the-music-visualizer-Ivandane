@@ -1,16 +1,23 @@
 // THESE VARIABLES MUST NOT BE CHANGED
 // Declare arrays
-let butterflies = []
+let butterflies = [];
+let heads = [];
+let facesDefault = [];
+let facesMove = [];
+let facesClosed = [];
+let masksDefault = [];
+let masksMove = [];
 let otherPhy = [];
 
 // Declare variables
+let girl;
 let initialize = true;
 let currentTime;
 
 // THESE VARIABLES CAN BE CHANGED
 // Declare array
 // numPoints, degrees, scale, startingIndex, speed, trailLength
-let otherPhyVariables = [500, 51, 10, 1000, 10, 5];
+let otherPhyVariables = [500, 51, 17.5, 1000, 10, 5];
 
 // Declare variables
 let numBassPhy = 7;
@@ -21,7 +28,7 @@ let bassSpeed = 20;
 let otherSpeed = 25;
 
 let vocalThreshold = 50;
-let drumThreshold = 50;
+let drumThreshold = 75;
 let bassThreshold = 50;
 let otherThreshold = 65;
 
@@ -32,13 +39,74 @@ let showPoints = false;
 function draw_one_frame(words, vocal, drum, bass, other, counter) {
   // Setup
   if (initialize) {
-    // Repeat 20 times
+    // Append butterflies array
+    // Repeat 20 times for 20 frames
     for (let i = 0; i < 20; i++) {
       // Create filename variable
       let filename = 'assets/butterfly/butterfly_' + nf(i, 2) + '.png';
 
-      // Append butterflies array with image
+      // Append array with image
       butterflies.push(loadImage(filename));
+    }
+
+    // Append heads array
+    // Repeat 10 times for 10 frames
+    for (let i = 0; i < 10; i++) {
+      // Create filename variable
+      let filename = 'assets/head/head_' + nf(i, 2) + '.png';
+
+      // Append array with image
+      heads.push(loadImage(filename));
+    }
+
+    // Append facesDefault array
+    // Repeat 10 times for 10 frames
+    for (let i = 0; i < 10; i++) {
+      // Create filename variable
+      let filename = 'assets/face/default/face_' + nf(i, 2) + '.png';
+
+      // Append array with image
+      facesDefault.push(loadImage(filename));
+    }
+
+    // Append facesMove array
+    // Repeat 8 times for 10 frames
+    for (let i = 0; i < 10; i++) {
+      // Create filename variable
+      let filename = 'assets/face/move/face_' + nf(i, 2) + '.png';
+
+      // Append array with image
+      facesMove.push(loadImage(filename));
+    }
+
+    // Append facesClosed array
+    // Repeat 10 times for 10 frames
+    for (let i = 0; i < 10; i++) {
+      // Create filename variable
+      let filename = 'assets/face/closed/face_' + nf(i, 2) + '.png';
+
+      // Append array with image
+      facesClosed.push(loadImage(filename));
+    }
+
+    // Append masksDefault array
+    // Repeat 10 times for 10 frames
+    for (let i = 0; i < 10; i++) {
+      // Create filename variable
+      let filename = 'assets/mask/default/mask_' + nf(i, 2) + '.png';
+
+      // Append array with image
+      masksDefault.push(loadImage(filename));
+    }
+
+    // Append masksMove array
+    // Repeat 20 times for 20 frames
+    for (let i = 0; i < 20; i++) {
+      // Create filename variable
+      let filename = 'assets/mask/move/mask_' + nf(i, 2) + '.png';
+
+      // Append array with image
+      masksMove.push(loadImage(filename));
     }
 
     // Create other phyllotaxis objects
@@ -54,10 +122,19 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
           otherPhyVariables[4],
           otherPhyVariables[5],
           showPoints,
-          showLines,
-          counter
+          showLines
       )); 
     }
+
+    // Create girl object
+    girl = new Girl(
+      heads,
+      facesDefault,
+      facesMove,
+      facesClosed,
+      masksDefault,
+      masksMove
+    );
 
     // Set boolean to false
     initialize = false;
@@ -80,12 +157,24 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
       phy.show();
     }
 
-    // Check if song is past 20 seconds
-    if (counter >= 20) {
+    girl.setCounter(counter);
+    girl.setDrum(drum);
+    girl.showHead();
+
+    // Check if song is past a certain amount of seconds
+    if (counter >= 0 && counter < 40.3) {
+      girl.showFaceClosed();
+    }
+    if (counter >= 40.3) {
+      girl.showFaceOpen();
+      girl.showMask();
+    }
+
+        if (counter >= 20) {
       otherThreshold = 70;
     }
   }
-
+  
   // Run showCounter function
   showCounter(counter);
 }

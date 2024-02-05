@@ -125,19 +125,34 @@ class Phyllotaxis {
 
   // MOVE FUNCTION
   move() {
-    // Increment step variable
     // Check for booleans set to true
     if (this.vocalSet) {
+      // Increment step variable
       this.step += this.vocal;
+
+      // Reset the boolean
+      this.vocalSet = false;
     }
     else if (this.drumSet) {
+      // Increment step variable
       this.step += this.drum;
+
+      // Reset the boolean
+      this.drumSet = false;
     }
     else if (this.bassSet) {
+      // Increment step variable
       this.step += this.bass;
+
+      // Reset the boolean
+      this.bassSet = false;
     }
     else if (this.otherSet) {
+      // Increment step variable
       this.step += this.other;
+
+      // Reset the boolean
+      this.otherSet = false;
     }
     else {
       this.step++;
@@ -212,22 +227,24 @@ class Phyllotaxis {
     this.trails.pop();
 
     // Declare variables
+
     let frameSpeed;
-    if (this.otherSet) {
-      if (this.other > 1) {
-        frameSpeed = map(this.other, 1, otherSpeed, 1, 1.25);
-      }
-      else {
-        frameSpeed = 1;
-      }
+    if (this.other > otherThreshold) {
+      frameSpeed = 5;
     }
-    this.frame = floor(((this.counter * 20) * frameSpeed) % this.imageArray.length);
-    console.log(this.frame);
+    else {
+      frameSpeed = 1;
+    }
+    this.frame = floor((this.counter * 15 * frameSpeed) % this.imageArray.length);
+    // console.log(frameSpeed);
+
+    // Set style
+    imageMode(CENTER);
+
     // Repeat for all trails of the trails array
     for (const [i, v] of this.trails.entries()) {
       // Draw image sequence
-      imageMode(CENTER);
-      image(this.imageArray[this.frame], v.x, v.y, 125, 125);
+      image(this.imageArray[this.frame], v.x, v.y, 150, 150);
     }
   }
 }
