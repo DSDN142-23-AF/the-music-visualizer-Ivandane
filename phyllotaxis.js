@@ -244,7 +244,7 @@ class Phyllotaxis {
     // Repeat for all trails of the trails array
     for (const [i, v] of this.trails.entries()) {
       // Draw image sequence
-      image(this.imageArray[this.frame], v.x, v.y, 150, 150);
+      image(this.imageArray[this.frame], v.x, v.y);
     }
   }
 }

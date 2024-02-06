@@ -6,7 +6,6 @@ class Girl {
     _facesDefault,
     _facesMove,
     _facesClosed,
-    _masksDefault,
     _masksMove
   ) {
     // Pass the arguments into their respective variables
@@ -14,7 +13,6 @@ class Girl {
     this.facesDefault = _facesDefault;
     this.facesMove = _facesMove;
     this.facesClosed = _facesClosed;
-    this.masksDefault = _masksDefault;
     this.masksMove = _masksMove;
 
     // Declare variables
@@ -45,7 +43,7 @@ class Girl {
 
     imageMode(CENTER);
 
-    image(this.heads[headsFrame], 0, 0, 700, 700);
+    image(this.heads[headsFrame], 0, 0);
   }
 
   // SHOW FACE CLOSED FUNCTION
@@ -54,7 +52,7 @@ class Girl {
 
     imageMode(CENTER);
 
-    image(this.facesClosed[facesClosedFrame], 0, 0, 700, 700);
+    image(this.facesClosed[facesClosedFrame], 0, 0);
   }
 
   // SHOW FACE OPEN FUNCTION
@@ -65,15 +63,15 @@ class Girl {
 
     if (this.drumSet) {
       if (this.currentFace < this.facesMove.length) {
-        image(this.facesMove[facesFrame], 0, 0, 700, 700);
+        image(this.facesMove[facesFrame], 0, 0);
         this.currentFace++;
       }
       else {
-        image(this.facesDefault[facesFrame], 0, 0, 700, 700);
+        image(this.facesDefault[facesFrame], 0, 0);
       }
     }
     else {
-      image(this.facesDefault[facesFrame], 0, 0, 700, 700);
+      image(this.facesDefault[facesFrame], 0, 0);
       this.currentFace = 0;
     }
   }
@@ -84,6 +82,6 @@ class Girl {
 
     imageMode(CENTER);
 
-    image(this.masksMove[masksMoveFrame], 0, 0, 700, 700);
+    image(this.masksMove[masksMoveFrame], 0, 0);
   }
 }

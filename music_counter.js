@@ -5,7 +5,6 @@ let heads = [];
 let facesDefault = [];
 let facesMove = [];
 let facesClosed = [];
-let masksDefault = [];
 let masksMove = [];
 let otherPhy = [];
 
@@ -17,7 +16,7 @@ let currentTime;
 // THESE VARIABLES CAN BE CHANGED
 // Declare array
 // numPoints, degrees, scale, startingIndex, speed, trailLength
-let otherPhyVariables = [500, 51, 17.5, 1000, 10, 5];
+let otherPhyVariables = [500, 51, 8, 1000, 10, 5];
 
 // Declare variables
 let numBassPhy = 7;
@@ -89,16 +88,6 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
       facesClosed.push(loadImage(filename));
     }
 
-    // Append masksDefault array
-    // Repeat 10 times for 10 frames
-    for (let i = 0; i < 10; i++) {
-      // Create filename variable
-      let filename = 'assets/mask/default/mask_' + nf(i, 2) + '.png';
-
-      // Append array with image
-      masksDefault.push(loadImage(filename));
-    }
-
     // Append masksMove array
     // Repeat 20 times for 20 frames
     for (let i = 0; i < 20; i++) {
@@ -132,7 +121,6 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
       facesDefault,
       facesMove,
       facesClosed,
-      masksDefault,
       masksMove
     );
 
@@ -183,10 +171,10 @@ function draw_one_frame(words, vocal, drum, bass, other, counter) {
 function showCounter(counter) {
   // Declare styles
   push();
-  translate(0, (height / 2) - 50);
+  translate(0, (height / 2) - 20);
   noStroke();
   textAlign(CENTER);
-  textSize(60);
+  textSize(30);
   rectMode(CENTER);
 
   // Check if song is playing
